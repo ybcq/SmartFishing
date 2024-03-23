@@ -1,0 +1,315 @@
+import win.ui;
+import config;
+import win.ui.tooltip;
+//import skin.sharp;
+import win.util.tray;
+import console;
+import mouse;
+import win.ui.menu;
+/*DSG{{*/
+mainForm = win.form(text="智能摸鱼 2.0";right=302;bottom=322;max=false;min=false;topmost=1)
+mainForm.add(
+Delay={cls="edit";text="5";left=79;top=167;right=121;bottom=183;dl=1;dt=1;edge=1;num=1;z=30};
+DelayB={cls="edit";text="300";left=147;top=194;right=189;bottom=210;dl=1;dt=1;edge=1;num=1;z=35};
+DelayBR={cls="edit";text="50";left=204;top=194;right=241;bottom=210;dl=1;dt=1;edge=1;num=1;z=37};
+DelayR={cls="edit";text="1";left=136;top=167;right=173;bottom=183;dl=1;dt=1;edge=1;num=1;z=32};
+Dock={cls="checkbox";text="贴边";left=35;top=303;right=85;bottom=323;checked=1;dl=1;dt=1;z=47};
+Down={cls="checkbox";text="下滚";left=20;top=138;right=70;bottom=158;checked=1;dl=1;dt=1;z=8};
+DownR={cls="edit";text="5";left=240;top=138;right=277;bottom=154;dl=1;dt=1;edge=1;num=1;z=13};
+DownTime={cls="edit";text="5000";left=183;top=138;right=225;bottom=154;dl=1;dt=1;edge=1;num=1;z=12};
+Go={cls="button";text="Go";left=239;top=294;right=297;bottom=319;db=1;dl=1;dt=1;z=4};
+Help={cls="button";text="®";left=7;top=303;right=23;bottom=319;db=1;dl=1;dt=1;z=34};
+INS={cls="radiobutton";text="INS";left=20;top=268;right=80;bottom=288;dl=1;dt=1;z=23};
+KeyR={cls="edit";text="5";left=240;top=257;right=277;bottom=273;dl=1;dt=1;edge=1;num=1;z=26};
+KeyTime={cls="edit";text="170";left=183;top=257;right=225;bottom=273;dl=1;dt=1;edge=1;num=1;z=24};
+Left={cls="checkbox";text="左键";left=20;top=67;right=70;bottom=87;checked=1;dl=1;dt=1;z=5};
+LeftR={cls="edit";text="5";left=241;top=67;right=278;bottom=83;dl=1;dt=1;edge=1;num=1;z=19};
+LeftX={cls="edit";text="500";left=118;top=68;right=160;bottom=84;dl=1;dt=1;edge=1;num=1;z=15};
+LeftY={cls="edit";text="500";left=183;top=68;right=225;bottom=84;dl=1;dt=1;edge=1;num=1;z=17};
+Margin={cls="checkbox";text="留边";left=135;top=303;right=185;bottom=323;checked=1;dl=1;dt=1;z=49};
+NumLK={cls="radiobutton";text="NumLK";left=20;top=245;right=80;bottom=265;checked=1;dl=1;dt=1;z=22};
+Right={cls="checkbox";text="右键";left=20;top=45;right=70;bottom=65;dl=1;dt=1;z=6};
+RightR={cls="edit";text="5";left=241;top=45;right=278;bottom=61;dl=1;dt=1;edge=1;num=1;z=20};
+RightX={cls="edit";text="500";left=118;top=45;right=160;bottom=61;dl=1;dt=1;edge=1;num=1;z=16};
+RightY={cls="edit";text="500";left=183;top=45;right=225;bottom=61;dl=1;dt=1;edge=1;num=1;z=18};
+Roll={cls="edit";text="5";left=248;top=167;right=290;bottom=183;dl=1;dt=1;edge=1;num=1;z=45};
+Topmost={cls="checkbox";text="置顶";left=85;top=303;right=135;bottom=323;checked=1;dl=1;dt=1;z=48};
+Up={cls="checkbox";text="上滚";left=20;top=116;right=70;bottom=136;checked=1;dl=1;dt=1;z=7};
+UpR={cls="edit";text="5";left=240;top=116;right=277;bottom=132;dl=1;dt=1;edge=1;num=1;z=10};
+UpTime={cls="edit";text="200";left=183;top=116;right=225;bottom=132;dl=1;dt=1;edge=1;num=1;z=9};
+groupbox={cls="groupbox";text="鼠标点击";left=14;top=24;right=290;bottom=91;dl=1;dt=1;edge=1;z=2};
+groupbox2={cls="groupbox";text="模拟按键防止锁屏";left=7;top=224;right=297;bottom=291;dl=1;dt=1;edge=1;z=21};
+groupbox3={cls="groupbox";text="滚轮动作";left=14;top=95;right=290;bottom=163;dl=1;dt=1;edge=1;z=3};
+groupbox4={cls="groupbox";text="可选单步";left=7;top=4;right=297;bottom=189;dl=1;dt=1;edge=1;z=1};
+static={cls="static";text="延时(秒)";left=101;top=258;right=177;bottom=278;dl=1;dt=1;transparent=1;z=25};
+static10={cls="static";text="±";left=192;top=194;right=202;bottom=214;dl=1;dt=1;transparent=1;z=38};
+static11={cls="static";text="±";left=228;top=46;right=238;bottom=66;dl=1;dt=1;transparent=1;z=39};
+static12={cls="static";text="±";left=228;top=67;right=238;bottom=87;dl=1;dt=1;transparent=1;z=40};
+static13={cls="static";text="X";left=98;top=46;right=118;bottom=66;align="center";dl=1;dt=1;transparent=1;z=41};
+static14={cls="static";text="X";left=98;top=67;right=118;bottom=87;align="center";dl=1;dt=1;transparent=1;z=42};
+static15={cls="static";text="Y";left=163;top=45;right=183;bottom=65;align="center";dl=1;dt=1;transparent=1;z=43};
+static16={cls="static";text="Y";left=163;top=66;right=183;bottom=86;align="center";dl=1;dt=1;transparent=1;z=44};
+static17={cls="static";text="随机步骤";left=195;top=167;right=248;bottom=187;dl=1;dt=1;transparent=1;z=46};
+static2={cls="static";text="±";left=228;top=117;right=238;bottom=137;dl=1;dt=1;transparent=1;z=11};
+static3={cls="static";text="±";left=228;top=138;right=238;bottom=158;dl=1;dt=1;transparent=1;z=14};
+static4={cls="static";text="±";left=228;top=257;right=238;bottom=277;dl=1;dt=1;transparent=1;z=27};
+static5={cls="static";text="范围(65535)";left=101;top=117;right=177;bottom=137;dl=1;dt=1;transparent=1;z=28};
+static6={cls="static";text="范围(65535)";left=101;top=138;right=177;bottom=158;dl=1;dt=1;transparent=1;z=29};
+static7={cls="static";text="小延时(秒)";left=14;top=167;right=84;bottom=187;dl=1;dt=1;transparent=1;z=31};
+static8={cls="static";text="±";left=124;top=167;right=134;bottom=187;dl=1;dt=1;transparent=1;z=33};
+static9={cls="static";text="大延时(秒)";left=82;top=194;right=152;bottom=214;dl=1;dt=1;transparent=1;z=36}
+)
+/*}}*/
+
+import win.ui.atom;
+var atom,hwnd = mainForm.atom("aardio.pattern.F4700CFB-B4ED-4637-8F10-C76B3B8DC7F9");
+if(!atom){ 
+	win.quitMessage();	return;
+}
+
+var help = /*
+智能摸鱼
+这是一款智能摸鱼的软件
+版本:{version}
+
+1.修改了功能，更加随机
+2.删除了启动参数 
+
+作者：御坂初琴
+CopyRight By Misaka HatSune 2020-2025
+*/
+help = string.replace(help, "{version}", config.__appVersion)
+
+/*
+arg = _CMDLINE;
+if(arg){
+	if(!string.find(arg, "NODOCK")){
+	//如果没使用dock库，这段代码应该屏蔽
+		import dock;
+		var wndObj = dock(mainForm, 10);
+		//吸附
+		wndObj.wndDock(true)
+		//置顶 应使用内部方法避免冲突
+		if(!string.find(arg, "NOTOP"))
+			mainForm.Topmost(true)
+		//留边
+		if(!string.find(arg, "NOSIDE"))
+			mainForm.wndMargin(true)
+	}
+}
+*/
+
+import dock;
+var wndObj = dock(mainForm, 10);
+//吸附
+wndObj.Dock.checked = wndObj.wndDock()
+wndObj.Dock.oncommand = function(id,event){
+    wndObj.wndDock(wndObj.Dock.checked)
+}
+//置顶 应使用内部方法避免冲突
+mainForm.Topmost.oncommand = function(id,event){
+    mainForm.wndTopmost(mainForm.Topmost.checked)
+    //win.setTopmost(mainForm.hwnd, mainForm.chkTopMost.checked)
+}
+//留边
+mainForm.Margin.oncommand = function(id,event){
+    mainForm.wndMargin(mainForm.Margin.checked)
+}
+
+//==================================
+
+var file,err = io.open('default.aproj')
+if(file != null){
+	io.open()
+	win.show(console.getWindow(),6)
+}
+
+//skin.sharp.attach("\res\skin.she");
+
+var tooltipCtr = win.ui.tooltip( mainForm );//在窗口上创建tooltip控件 
+tooltipCtr.addTool(mainForm.Help,"帮助",0x10/*_TTF_SUBCLASS*/ )
+
+tray = win.util.tray(mainForm.hwnd) //创建托盘图标
+tray.message = 0x400+9981/*_WM_TRAYMESSAGE*/
+tray.tip = mainForm.text //设置鼠标提示
+
+mainForm.trayicon = tray;
+
+mainForm.traymenu=win.ui.popmenu(mainForm);
+mainForm.traymenu.add("开始/停止",function(id){ //添加了一个退出程序的菜单
+   	mainForm.Go.oncommand();
+})
+mainForm.traymenu.add();
+mainForm.traymenu.add('打开',function(id){ //添加了一个打开主界面的菜单
+    mainForm.show(); 
+})
+mainForm.traymenu.add('退出',function(id){ //添加了一个退出程序的菜单
+   	mainForm.close();
+})
+
+//下面是获取鼠标消息弹出上面的右键菜单
+mainForm.wndproc = function(hwnd,message,wparam,lparam){
+    select(message) {//判断消息类型
+        case( 0x400+9981/*_WM_TRAYMESSAGE*/ ) { //托盘图标消息
+            if(lparam = 0x203/*_WM_LBUTTONDBLCLK)*/){  //鼠标双击
+                mainForm.show(true);
+                win.showForeground(mainForm.hwnd)
+            }
+            elseif(lparam = 0x205/*_WM_RBUTTONUP*/){ //鼠标右键
+                x,y = mouse.getPos();
+                win.setForeground(mainForm.hwnd)
+                mainForm.traymenu.popup(x,y,true)
+            } 
+             
+        } 
+        case( 0x112/*_WM_SYSCOMMAND*/ ){ //系统命令消息
+            if( wparam == 0xF020/*_SC_MINIMIZE*/ ){ //用户点击了最小化按钮
+                mainForm.show(false); //隐藏窗口
+                return true;//阻击默认消息传递，取消最小化过程
+            } 
+        }
+    } 
+}
+
+//初始化到右侧中间
+var width, height = win.getScreen();
+var winHeight = mainForm.height; 
+var winWidth = mainForm.width;
+//win.setPos(mainForm.hwnd, width-winWidth, height-winHeight-40, , );
+win.setPos(mainForm.hwnd, 0, height-winHeight-55, , );
+
+//绑定config文件
+mainForm.bindConfig( config.SmartWorking,{
+    edit = "text"; //绑定edit控件的text属性值到配置文件
+    radiobutton = "checked";
+    checkbox = "checked";
+    combobox = "selIndex";
+} );
+
+config.SmartWorking.load(); //加载默认设置
+
+mainForm.Go.oncommand = function(id,event){
+	if(mainForm.Go.text == "Go"){
+		win.show(mainForm.hwnd, 6);
+		win.msgboxTimeout("3秒后开始任务！",,3000);
+		thread.set("Start", true);
+		thread.invoke(Working, mainForm);
+		thread.invoke(Keying, mainForm);
+		mainForm.Go.text = "Stop";
+	}
+	else{
+		thread.set("Start", false);
+		mainForm.Go.text = "Go";
+	}
+}
+
+function Working(mainForm){
+	import mouse;
+	import math;
+	while(thread.get("Start") == true){
+		for(i = 0; tonumber(mainForm.Roll.text); 1){
+			if(thread.get("Start") == true){
+				var choose = math.random(0, 10)
+				select(choose) {
+					case 0,1 {
+						io.print("右键点击动作")
+						if(thread.get("Start") == true && mainForm.Right.checked == true){
+							var x = math.random(mainForm.RightX.text - mainForm.RightR.text, mainForm.RightX.text + mainForm.RightR.text);
+							var y = math.random(mainForm.RightY.text - mainForm.RightR.text, mainForm.RightY.text + mainForm.RightR.text);
+							var t = math.random(mainForm.Delay.text - mainForm.DelayR.text, mainForm.Delay.text + mainForm.DelayR.text);
+							mouse.rb.click(x, y, true);
+							if(thread.get("Start") == true)win.delay(t * 1000);
+						}
+					}
+					case 2,3,4 {
+						io.print("左键点击动作")
+						if(thread.get("Start") == true && mainForm.Left.checked == true){
+							var x = math.random(mainForm.LeftX.text - mainForm.LeftR.text, mainForm.LeftX.text + mainForm.LeftR.text);
+							var y = math.random(mainForm.LeftY.text - mainForm.LeftR.text, mainForm.LeftY.text + mainForm.LeftR.text);
+							var t = math.random(mainForm.Delay.text - mainForm.DelayR.text, mainForm.Delay.text + mainForm.DelayR.text);
+							mouse.click(x, y, true);
+							if(thread.get("Start") == true)win.delay(t * 1000);
+						}
+					}
+					case 5,6 {
+						io.print("滚轮上动作")
+						if(thread.get("Start") == true && mainForm.Up.checked == true){
+							var i = math.random(mainForm.UpTime.text - mainForm.UpR.text, mainForm.UpTime.text + mainForm.UpR.text);
+							var t = math.random(mainForm.Delay.text - mainForm.DelayR.text, mainForm.Delay.text + mainForm.DelayR.text);
+							var x = 0;
+							while((x * 100 < i) && thread.get("Start") == true){ 
+								mouse.mb.roll(math.random(1, 100));
+								win.delay(math.random(1, 100))
+								x = x + 1
+							}
+							if(thread.get("Start") == true)win.delay(t * 1000);
+						}
+					}
+					case 7,8,9 {
+						io.print("滚轮下动作")
+						if(thread.get("Start") == true && mainForm.Down.checked == true){
+							var i = math.random(mainForm.DownTime.text - mainForm.DownR.text, mainForm.DownTime.text + mainForm.DownR.text);
+							var t = math.random(mainForm.Delay.text - mainForm.DelayR.text, mainForm.Delay.text + mainForm.DelayR.text);
+							var x = 0;
+							while((x * 100 < i) && thread.get("Start") == true){ 
+								mouse.mb.roll(math.random(1, 100) * -1);
+								win.delay(math.random(1, 100))
+								x = x + 1
+							}
+							if(thread.get("Start") == true)win.delay(t * 1000);
+						}
+					}
+					else {
+						io.print("空动作")
+					}
+				}
+			}
+		}
+		io.print("大循环间隔")
+		if(thread.get("Start") == true){
+			var t = math.random(mainForm.DelayB.text - mainForm.DelayBR.text, mainForm.DelayB.text + mainForm.DelayBR.text);
+			win.delay(t * 1000);
+		}
+	}
+}
+
+function Keying(mainForm){
+    import key;
+    import math;
+    while(thread.get("Start") == true){
+    	io.print("键盘点击循环")
+    	if(mainForm.NumLK.checked == true){
+    		key.press(0x90/*_VK_NUMLOCK*/);
+    		win.delay(100)
+    		key.press(0x90/*_VK_NUMLOCK*/);
+    	}
+    	if(mainForm.INS.checked == true){
+    		key.press(0x2D/*_VK_INSERT*/);
+    		win.delay(100)
+    		key.press(0x2D/*_VK_INSERT*/);
+    	}
+    	if(thread.get("Start") == true){
+			var t = math.random(mainForm.KeyTime.text - mainForm.KeyR.text, mainForm.KeyTime.text + mainForm.KeyR.text);
+			win.delay(t * 1000);
+		
+		}
+    }
+}
+
+mainForm.NumLK.oncommand = function(id,event){
+	mainForm.INS.checked = false;
+}
+
+mainForm.INS.oncommand = function(id,event){
+	mainForm.NumLK.checked = false;	
+}
+
+mainForm.Help.oncommand = function(id,event){
+	win.msgbox(help, "关于 智能摸鱼")
+}
+
+mainForm.onClose = function(hwnd,message,wParam,lParam){
+    tray.delete()
+}
+mainForm.show();
+return win.loopMessage();

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project ver="10" name="SmartFishing" libEmbed="true" icon="res\icon.ico" ui="win" output="SmartFishing.exe" CompanyName="御坂初琴软件屋" FileDescription="智能摸鱼小工具" LegalCopyright="Copyright (C) 御坂初琴软件屋 2021" ProductName="SmartFishing" InternalName="SmartFishing" FileVersion="2.0.0.0" ProductVersion="2.0.0.0" publishDir="/dist/" dstrip="false" local="false" ignored="false">
+	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
+	<folder name="资源文件" path="res" embed="true" local="false" ignored="false">
+		<file name="Help.ico" path="res\Help.ico" comment="res\Help.ico"/>
+		<file name="icon.ico" path="res\icon.ico" comment="res\icon.ico"/>
+		<file name="run.ico" path="res\run.ico" comment="res\run.ico"/>
+		<file name="skin.she" path="res\skin.she" comment="res\skin.she"/>
+	</folder>
+	<folder name="窗体文件" path="dlg" comment="目录" embed="true"/>
+</project>
